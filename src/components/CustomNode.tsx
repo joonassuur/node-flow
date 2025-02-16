@@ -29,6 +29,7 @@ const CustomNode = ({ data, id, type }: Props) => {
       >
         Delete
       </button>
+      {/* youtube is currently the only node with input functionality */}
       {type === 'youtube' && <Handle type="source" position={Position.Right} />}
       {type !== 'youtube' && <Handle type="target" position={Position.Left} />}
     </div>
