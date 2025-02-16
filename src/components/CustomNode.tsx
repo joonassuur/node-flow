@@ -1,14 +1,33 @@
 import { Handle, Position } from '@xyflow/react';
+import { InputType } from '../types';
 import { getBgColor } from '../utils';
 
 interface Props {
   data: {
     label: string;
     deleteNode: (id: string) => void;
+    inputType?: InputType;
   };
   id: string;
   type: string;
 }
+
+const getHandles = (inputType: InputType | '') => {
+  switch (inputType) {
+    case 'input':
+      return <Handle type="source" position={Position.Right} />;
+    case 'output':
+      return <Handle type="target" position={Position.Left} />;
+    case 'default':
+    default:
+      return (
+        <>
+          <Handle type="target" position={Position.Left} />
+          <Handle type="source" position={Position.Right} />
+        </>
+      );
+  }
+};
 
 const CustomNode = ({ data, id, type }: Props) => {
   const onNodeDelete = (e: React.MouseEvent) => {
@@ -29,9 +48,7 @@ const CustomNode = ({ data, id, type }: Props) => {
       >
         Delete
       </button>
-      {/* youtube is currently the only node with input functionality */}
-      {type === 'youtube' && <Handle type="source" position={Position.Right} />}
-      {type !== 'youtube' && <Handle type="target" position={Position.Left} />}
+      {getHandles(data.inputType || '')}
     </div>
   );
 };

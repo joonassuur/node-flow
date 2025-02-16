@@ -1,5 +1,5 @@
-const getBgColor = (label: string) => {
-  switch (label) {
+const getBgColor = (type: string) => {
+  switch (type) {
     case 'youtube':
       return 'bg-red-500';
     case 'docs':

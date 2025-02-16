@@ -1,5 +1,5 @@
 import { useDnD } from '../providers/useDnD';
-import { SidebarElement } from '../types';
+import { SidebarElement, InputType } from '../types';
 import { getBgColor } from '../utils';
 
 interface Props {
@@ -12,9 +12,10 @@ function Sidebar({ sidebarList }: Props) {
   const onDragStart = (
     event: React.DragEvent,
     nodeType: string,
-    label: string
+    label: string,
+    inputType: InputType
   ) => {
-    setType({ nodeType, label });
+    setType({ nodeType, label, inputType });
     event.dataTransfer.effectAllowed = 'move';
   };
 
@@ -32,7 +33,7 @@ function Sidebar({ sidebarList }: Props) {
                         font-semibold transition-all 
                         hover:opacity-80 hover:scale-105`}
             onDragStart={(event) =>
-              onDragStart(event, item.nodeType, item.label)
+              onDragStart(event, item.nodeType, item.label, item.inputType)
             }
             draggable
           >

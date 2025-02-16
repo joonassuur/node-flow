@@ -34,8 +34,7 @@ function DnDFlow() {
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
   const [sidebarList, setSidebarList] = useState(sidebarElements);
   const { screenToFlowPosition } = useReactFlow();
-  const [{ nodeType, label }] = useDnD();
-
+  const [{ nodeType, label, inputType }] = useDnD();
   const onConnect: OnConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
@@ -49,7 +48,6 @@ function DnDFlow() {
   const onDrop = useCallback(
     (event: React.DragEvent) => {
       event.preventDefault();
-
       if (!nodeType || nodes.some((node) => node.type === nodeType)) {
         return;
       }
@@ -63,13 +61,13 @@ function DnDFlow() {
         id: uuidv4(),
         type: nodeType,
         position,
-        data: { label: label || nodeType },
+        data: { label: label || nodeType, inputType },
       };
 
       setNodes((nds) => [...nds, newNode]);
       setSidebarList((prev) => prev.filter((item) => item.label !== label));
     },
-    [screenToFlowPosition, setNodes, nodeType, label, nodes]
+    [screenToFlowPosition, setNodes, nodeType, label, nodes, inputType]
   );
 
   const handleRunWorkflow = () => {
