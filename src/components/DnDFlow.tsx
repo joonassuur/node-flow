@@ -72,7 +72,9 @@ function DnDFlow() {
 
   const handleRunWorkflow = () => {
     if (nodes.length < 2) {
-      toast.error('Please drag elements on the pane to run a workflow');
+      toast.error(
+        'Please drag elements on the pane and connect them to run a workflow'
+      );
       return;
     }
 
