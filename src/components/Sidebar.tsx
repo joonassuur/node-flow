@@ -1,4 +1,4 @@
-import { useDnD } from './useDnD';
+import { useDnD } from '../providers/useDnD';
 import { SidebarElement } from '../types';
 import { getBgColor } from '../utils';
 
@@ -27,7 +27,7 @@ function Sidebar({ sidebarList }: Props) {
         {sidebarList.map((item) => (
           <div
             key={item.label}
-            className={`${getBgColor(item.label)} 
+            className={`${getBgColor(item.nodeType)} 
                         rounded-sm text-center p-2 text-white cursor-pointer 
                         font-semibold transition-all 
                         hover:opacity-80 hover:scale-105`}

@@ -7,9 +7,10 @@ interface Props {
     deleteNode: (id: string) => void;
   };
   id: string;
+  type: string;
 }
 
-const CustomNode = ({ data, id }: Props) => {
+const CustomNode = ({ data, id, type }: Props) => {
   const onNodeDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
     data.deleteNode(id);
@@ -18,7 +19,7 @@ const CustomNode = ({ data, id }: Props) => {
   return (
     <div
       className={`py-1 flex items-center px-4 border border-gray-300 ${getBgColor(
-        data.label
+        type
       )}`}
     >
       <h3 className="text-xs text-white font-semibold">{data.label}</h3>
@@ -28,8 +29,8 @@ const CustomNode = ({ data, id }: Props) => {
       >
         Delete
       </button>
-      <Handle type="target" position={Position.Left} />
-      <Handle type="source" position={Position.Right} />
+      {type === 'youtube' && <Handle type="source" position={Position.Right} />}
+      {type !== 'youtube' && <Handle type="target" position={Position.Left} />}
     </div>
   );
 };

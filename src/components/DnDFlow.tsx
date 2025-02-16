@@ -18,7 +18,8 @@ import '@xyflow/react/dist/style.css';
 import { sidebarElements } from '../constants';
 import Sidebar from './Sidebar';
 import CustomNode from './CustomNode';
-import { useDnD } from './useDnD';
+import ButtonsBar from './ButtonsBar';
+import { useDnD } from '../providers/useDnD';
 
 const nodeTypes = {
   youtube: CustomNode,
@@ -124,15 +125,10 @@ function DnDFlow() {
 
   return (
     <div className="p-4">
-      <div className="w-full flex justify-end mb-4">
-        <button className="bg-blue-400 text-white mr-2" onClick={handleReset}>
-          Reset
-        </button>
-        <button className="bg-red-400 text-white" onClick={handleRunWorkflow}>
-          Run workflow
-        </button>
-      </div>
-
+      <ButtonsBar
+        handleReset={handleReset}
+        handleRunWorkflow={handleRunWorkflow}
+      />
       <div className="dndflow w-full flex flex-col md:flex-row">
         <Sidebar sidebarList={sidebarList} />
         <div
